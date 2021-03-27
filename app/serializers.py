@@ -1,6 +1,5 @@
-from django.core.exceptions import ValidationError
+
 from rest_framework import serializers
-# from django.contrib.auth.models import User
 from .models import Manager, Employee
 
 
@@ -50,30 +49,3 @@ class EmplyeeSerializer(serializers.ModelSerializer):
         model=Employee
         fields="__all__"
 
-
-# class UserLogoutSerializer(serializers.ModelSerializer):
-#     token = serializers.CharField()
-#     status = serializers.CharField(required=False, read_only=True)
-#
-#     def validate(self, data):
-#         token = data.get("token", None)
-#         print(token)
-#         user = None
-#         try:
-#             user = Manager.objects.get(token=token)
-#             if not user.ifLogged:
-#                 raise ValidationError("User is not logged in.")
-#         except Exception as e:
-#             raise ValidationError(str(e))
-#         user.ifLogged = False
-#         user.token = ""
-#         user.save()
-#         data['status'] = "User is logged out."
-#         return data
-#
-#     class Meta:
-#         model = Manager
-#         fields = (
-#             'token',
-#             'status',
-#         )

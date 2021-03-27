@@ -1,8 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from rest_framework.generics import GenericAPIView, CreateAPIView,ListAPIView,RetrieveAPIView,UpdateAPIView,DestroyAPIView
 from .serializers import UserSerializer, LoginSerializer, EmplyeeSerializer
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status
 
 from .models import Manager, Employee
 from django.http import HttpResponse
@@ -23,7 +23,6 @@ class RegisterAPI(GenericAPIView):
 
 
 class LoginAPI(CreateAPIView):
-    # queryset = Manager.objects.get(email,pa)
     serializer_class = LoginSerializer
 
     def post(self, request, *args, **kwargs):
@@ -48,13 +47,7 @@ class ManagerApi(CreateAPIView):
 class EmployeeViewAll(ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmplyeeSerializer
-#     authentication_classes = [SessionAuthentication]
-#     permission_classes = [IsAuthenticated]
 
-
-# class EmployeeRetrieve(RetrieveAPIView):
-#     es=Employee.objects.all()
-#     serializer_class = EmplyeeSerializer
 
 class EmployeeDelete(DestroyAPIView):
     queryset=Employee.objects.all()
@@ -66,18 +59,3 @@ class EmployeeUpdate(UpdateAPIView):
     serializer_class = EmplyeeSerializer
 
 
-
-# class Logout(generics.GenericAPIView):
-#     queryset = Manager.objects.all()
-#     serializer_class = UserLogoutSerializer
-#
-#     def post(self, request, *args, **kwargs):
-#         serializer_class = UserLogoutSerializer(data=request.data)
-#         if serializer_class.is_valid(raise_exception=True):
-#             return Response(serializer_class.data, status=status.HTTP_200_OK)
-#         return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-#
-# def index(request):
-#     return redirect('/app/login')
